@@ -64,7 +64,7 @@ namespace GitMulltyFetch.Model
         }
 
         protected abstract Repository createRepository();
-        public void TryAddRepository(string path)
+        public Repository TryAddRepository(string path)
         {
             if (Directory.Exists(path))
             {
@@ -75,7 +75,11 @@ namespace GitMulltyFetch.Model
                 repository.FullPath = path;
                 
                 Repositories.Add(repository);
+
+                return repository;
             }
+
+            return null;
         }
 
         private void UpdateStatus(Repository repository, CommandRunner.ExecutionResult result)
@@ -97,14 +101,20 @@ namespace GitMulltyFetch.Model
             }
         }
 
-        public void RefreshStatus()
+        public void RefreshStatus(IEnumerable<Repository> repositories = null)
         {
-            foreach (var repository in Repositories)
+            var collection = repositories ?? Repositories;
+
+            foreach (var repository in collection)
             {
-                repository.SetStatus(RepoStatus.Fetching);
-                CommandRunner.RunCommand(SynchronizationContext.Current, fetchCommand, result => UpdateStatus(repository, result), repository.FullPath);
+                RefreshStatus(repository);
             }
         }
 
+        public void RefreshStatus(Repository repository)
+        {
+            repository.SetStatus(RepoStatus.Fetching);
+            CommandRunner.RunCommand(SynchronizationContext.Current, fetchCommand, result => UpdateStatus(repository, result), repository.FullPath);
+        }
     }
 }

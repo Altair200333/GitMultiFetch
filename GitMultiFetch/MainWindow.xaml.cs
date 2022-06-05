@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Forms;
 using GitMulltyFetch;
 using GitMulltyFetch.Model;
@@ -30,10 +31,11 @@ namespace GitMultiFetch
 
             if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
-                GitWatch.TryAddRepository(fbd.SelectedPath);
+                var repo = GitWatch.TryAddRepository(fbd.SelectedPath);
+
+                GitWatch.RefreshStatus(repo);
             }
 
-            GitWatch.RefreshStatus();
         }
 
         private void RefreshButtonClick(object sender, RoutedEventArgs e)
@@ -51,15 +53,22 @@ namespace GitMultiFetch
                     return;
                 }
 
+                List<Repository> repositories = new List<Repository>();
                 foreach (var path in files)
                 {
-                    GitWatch.TryAddRepository(path);
+                    var repo = GitWatch.TryAddRepository(path);
+                    if (repo != null)
+                    {
+                        repositories.Add(repo);
+                    }
                 }
 
                 GitWatch.Save();
+
+                GitWatch.RefreshStatus(repositories);
+
             }
 
-            GitWatch.RefreshStatus();
         }
 
         private void RemoveItemButtonClick(object sender, RoutedEventArgs e)
