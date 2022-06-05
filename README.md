@@ -28,7 +28,7 @@
 
 This program shows if repositiories are up to date
 
-Just drag & drop folderes into the window
+Just drag & drop foldres into the window
 
 ## Examples
 
