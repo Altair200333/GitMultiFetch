@@ -39,12 +39,12 @@ Just drag & drop foldres into the window
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Altair200333/GitMultiFetch?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Altair200333/GitMultiFetch
 [contributors-url]: https://github.com/Altair200333/GitMultiFetch/graphs/contributors
-[forks-shield]: http://img.shields.io/github/forks/Altair200333/GitMultiFetch?style=for-the-badge
+[forks-shield]: http://img.shields.io/github/forks/Altair200333/GitMultiFetch
 [forks-url]: https://github.com/Altair200333/GitMultiFetch/network/members
-[stars-shield]: https://img.shields.io/github/stars/Altair200333/GitMultiFetch?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Altair200333/GitMultiFetch
 [stars-url]: https://github.com/Altair200333/GitMultiFetch/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Altair200333/GitMultiFetch?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/Altair200333/GitMultiFetch
 [issues-url]: https://github.com/Altair200333/GitMultiFetch/issues
 [product-screenshot]: images/screenshot.png
