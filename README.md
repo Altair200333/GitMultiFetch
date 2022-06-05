@@ -26,7 +26,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This program allows shows if repositiories are up to date
+This program shows if repositiories are up to date
 
 Just drag & drop folderes into the window
 
