@@ -42,7 +42,7 @@ Just drag & drop foldres into the window
 [contributors-shield]: https://img.shields.io/github/contributors/Altair200333/GitMultiFetch?style=for-the-badge
 [contributors-url]: https://github.com/Altair200333/GitMultiFetch/graphs/contributors
 [forks-shield]: http://img.shields.io/github/forks/Altair200333/GitMultiFetch?style=for-the-badge
-[forks-url]: http://github.com/Altair200333/GitMultiFetch/network/members
+[forks-url]: https://github.com/Altair200333/GitMultiFetch/network/members
 [stars-shield]: https://img.shields.io/github/stars/Altair200333/GitMultiFetch?style=for-the-badge
 [stars-url]: https://github.com/Altair200333/GitMultiFetch/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Altair200333/GitMultiFetch?style=for-the-badge
