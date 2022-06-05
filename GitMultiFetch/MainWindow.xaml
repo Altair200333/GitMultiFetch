@@ -1,0 +1,73 @@
+﻿<Window x:Class="GitMultiFetch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GitMultiFetch"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Git watchdog" Height="450" Width="800"
+        xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        MinHeight="250"
+        MinWidth="400"
+        AllowDrop="True"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Drop="ImagePanel_Drop">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Top" Height="124">
+            <wpf:Card Padding="10" Margin="12">
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Synchronize multiple repositories</TextBlock>
+            </wpf:Card>
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource ResourceKey=MaterialDesignPaperButton}" Width="120"
+                        HorizontalAlignment="Left" Content="Add repo" Click="AddRepoButtonClick" Margin="12" />
+                <Button Style="{DynamicResource ResourceKey=MaterialDesignPaperSecondaryButton}" Width="100"
+                        HorizontalAlignment="Left" Content="Refresh" Margin="12" Click="RefreshButtonClick" />
+            </StackPanel>
+        </StackPanel>
+        <ListView Name="RepoList" Grid.Row="1"
+                  ItemsSource="{Binding GitWatch.Repositories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  VerticalContentAlignment="Top"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.CanContentScroll="False">
+            <!--<ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Repo name"
+                                        DisplayMemberBinding="{Binding Name}"  />
+                    <GridViewColumn Width="240" Header="Update status"  
+                                        DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Remove"></GridViewColumn>
+                </GridView>
+
+            </ListView.View>-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="180" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
+                                   ToolTip="{Binding FullPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Foreground="BlueViolet" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                        <TextBlock Width="100" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
+                                   Foreground="{Binding StatusColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                        <Button Click="RemoveItemButtonClick"
+                                Style="{DynamicResource ResourceKey=MaterialDesignOutlinedButton}" Width="80"
+                                FontSize="12" Content="Remove" Margin="5" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+</Window>
