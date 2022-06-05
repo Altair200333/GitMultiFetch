@@ -23,16 +23,16 @@ namespace GitMulltyFetch.Model
             Process process = new Process();
 
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.FileName = "cmd.exe";
             process.StartInfo.Arguments = "/C " + command;
 
-            if(!string.IsNullOrEmpty(workingDirector))
+            if (!string.IsNullOrEmpty(workingDirector))
             {
                 process.StartInfo.WorkingDirectory = workingDirector;
             }
 
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.Start();
             
             string output = await process.StandardOutput.ReadToEndAsync();
