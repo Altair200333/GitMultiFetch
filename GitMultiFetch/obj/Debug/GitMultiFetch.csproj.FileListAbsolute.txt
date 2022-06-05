@@ -41,3 +41,4 @@ F:\Projects\GitMultiFetch\GitMultiFetch\obj\Debug\GitMultiFetch.csproj.CoreCompi
 F:\Projects\GitMultiFetch\GitMultiFetch\obj\Debug\GitMultiFetch.csproj.CopyComplete
 F:\Projects\GitMultiFetch\GitMultiFetch\obj\Debug\GitMultiFetch.exe
 F:\Projects\GitMultiFetch\GitMultiFetch\obj\Debug\GitMultiFetch.pdb
+F:\Projects\GitMultiFetch\GitMultiFetch\obj\Debug\GitMultiFetch.csproj.AssemblyReference.cache

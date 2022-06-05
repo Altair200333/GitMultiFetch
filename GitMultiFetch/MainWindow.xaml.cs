@@ -18,6 +18,7 @@ namespace GitMultiFetch
             InitializeComponent();
             GitWatch = new GitOverwatchViewModel(new WatchTxtSerializer("folders.txt"));
             GitWatch.Load();
+            GitWatch.RefreshStatus();
 
             RepoList.ItemsSource = GitWatch.Repositories;
         }
@@ -31,6 +32,8 @@ namespace GitMultiFetch
             {
                 GitWatch.TryAddRepository(fbd.SelectedPath);
             }
+
+            GitWatch.RefreshStatus();
         }
 
         private void RefreshButtonClick(object sender, RoutedEventArgs e)
@@ -55,6 +58,8 @@ namespace GitMultiFetch
 
                 GitWatch.Save();
             }
+
+            GitWatch.RefreshStatus();
         }
 
         private void RemoveItemButtonClick(object sender, RoutedEventArgs e)
