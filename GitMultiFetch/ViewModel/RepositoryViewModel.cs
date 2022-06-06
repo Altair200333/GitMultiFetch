@@ -40,6 +40,7 @@ namespace GitMulltyFetch
 
             OnPropertyChanged("Status");
             OnPropertyChanged("StatusColor");
+            OnPropertyChanged("StatusReport");
         }
 
         private Brush GetStatusColor()

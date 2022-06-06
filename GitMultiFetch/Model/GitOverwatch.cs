@@ -13,11 +13,9 @@ namespace GitMulltyFetch.Model
         IWatcherSerializer serializer { get; set; }
     }
 
-    
 
-    public abstract class GitOwerwatch: IGitWatch
+    public abstract class GitOwerwatch : IGitWatch
     {
-
         private string fetchCommand = "git remote update && git status -uno";
         private string isGitDirectory = "git rev-parse --is-inside-work-tree";
 
@@ -64,16 +62,17 @@ namespace GitMulltyFetch.Model
         }
 
         protected abstract Repository createRepository();
+
         public Repository TryAddRepository(string path)
         {
             if (Directory.Exists(path))
             {
                 var directoryName = Path.GetFileName(path);
                 var repository = createRepository();
-                
+
                 repository.Name = directoryName;
                 repository.FullPath = path;
-                
+
                 Repositories.Add(repository);
 
                 return repository;
@@ -85,10 +84,13 @@ namespace GitMulltyFetch.Model
         private void UpdateStatus(Repository repository, CommandRunner.ExecutionResult result)
         {
             bool matched = false;
+
+            repository.StatusReport = result.Output;
+
             foreach (var tuple in _messageToStatus)
             {
                 var match = tuple.Key.Match(result.Output);
-                if(match.Success)
+                if (match.Success)
                 {
                     repository.SetStatus(tuple.Value);
                     matched = true;
@@ -114,7 +116,8 @@ namespace GitMulltyFetch.Model
         public void RefreshStatus(Repository repository)
         {
             repository.SetStatus(RepoStatus.Fetching);
-            CommandRunner.RunCommand(SynchronizationContext.Current, fetchCommand, result => UpdateStatus(repository, result), repository.FullPath);
+            CommandRunner.RunCommand(SynchronizationContext.Current, fetchCommand,
+                result => UpdateStatus(repository, result), repository.FullPath);
         }
     }
 }

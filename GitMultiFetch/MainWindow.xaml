@@ -60,7 +60,8 @@
                                    Foreground="BlueViolet" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <TextBlock Width="100" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
                                    Foreground="{Binding StatusColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                   Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   ToolTip="{Binding StatusReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <Button Click="RemoveItemButtonClick"
                                 Style="{DynamicResource ResourceKey=MaterialDesignOutlinedButton}" Width="80"
                                 FontSize="12" Content="Remove" Margin="5" />
