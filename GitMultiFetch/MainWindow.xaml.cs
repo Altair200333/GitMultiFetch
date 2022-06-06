@@ -34,6 +34,7 @@ namespace GitMultiFetch
                 var repo = GitWatch.TryAddRepository(fbd.SelectedPath);
 
                 GitWatch.RefreshStatus(repo);
+                GitWatch.Save();
             }
 
         }
