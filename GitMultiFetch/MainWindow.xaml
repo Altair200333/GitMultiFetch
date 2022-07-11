@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GitMultiFetch"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Git watchdog" Height="450" Width="800"
         xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:model="clr-namespace:GitMulltyFetch.Model"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -42,6 +44,11 @@
                   VerticalContentAlignment="Top"
                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ScrollViewer.CanContentScroll="False">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type model:Repository}">
+                    <model:Repository Name="RescueViewer" FullPath="C:\PetroGM.RescueViewer"/>
+                </x:Array>
+            </d:ListView.ItemsSource>
             <!--<ListView.View>
                 <GridView>
                     <GridViewColumn Width="140" Header="Repo name"
@@ -60,8 +67,11 @@
                                    Foreground="BlueViolet" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <TextBlock Width="100" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
                                    Foreground="{Binding StatusColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    ToolTip="{Binding StatusReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                        <TextBlock Width="90" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
+                                   Text="{Binding ChangesText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ToolTip="{Binding ChangesReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <Button Click="RemoveItemButtonClick"
                                 Style="{DynamicResource ResourceKey=MaterialDesignOutlinedButton}" Width="80"
                                 FontSize="12" Content="Remove" Margin="5" />

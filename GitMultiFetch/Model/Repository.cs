@@ -14,8 +14,11 @@
     {
         public string Name { get; set; } = "defaultName";
         public string FullPath { get; set; } = "C:/defaultName";
+        public int Changes { get; set; } = 0;
+        public string ChangesReport { get; set; } = "No changes";
+
         public string Status => GetStatus();
-        public string StatusReport { get; set; } = "Empty for now";
+        public string StatusReport { get; set; }
 
         protected RepoStatus _status = RepoStatus.Unknown;
 

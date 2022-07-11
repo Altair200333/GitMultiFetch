@@ -27,6 +27,12 @@ namespace GitMulltyFetch
         };
 
         public Brush StatusColor => GetStatusColor();
+        public string ChangesText => GetChangesText();
+
+        private string GetChangesText()
+        {
+            return "Changes " + Changes;
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -37,10 +43,13 @@ namespace GitMulltyFetch
         public override void SetStatus(RepoStatus status)
         {
             base.SetStatus(status);
-
-            OnPropertyChanged("Status");
-            OnPropertyChanged("StatusColor");
-            OnPropertyChanged("StatusReport");
+            
+            OnPropertyChanged(nameof(Status));
+            OnPropertyChanged(nameof(StatusColor));
+            OnPropertyChanged(nameof(StatusReport));
+            OnPropertyChanged(nameof(Changes));
+            OnPropertyChanged(nameof(ChangesText));
+            OnPropertyChanged(nameof(ChangesReport));
         }
 
         private Brush GetStatusColor()

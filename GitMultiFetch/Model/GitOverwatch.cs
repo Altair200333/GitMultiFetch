@@ -23,6 +23,7 @@ namespace GitMulltyFetch.Model
         readonly Regex _upToDateRegex = new Regex(@"Your branch is up to date with (.*)");
         readonly Regex _aheadRegex = new Regex(@"Your branch is ahead of");
         readonly Regex _notAGitRepoRegex = new Regex(@"not a git repository");
+        readonly Regex _changesRegex = new Regex(@"modified:(.*)");
 
         private readonly Dictionary<Regex, RepoStatus> _messageToStatus;
         public Collection<Repository> Repositories { get; set; }
@@ -89,6 +90,23 @@ namespace GitMulltyFetch.Model
 
             foreach (var tuple in _messageToStatus)
             {
+                var changesMatches = _changesRegex.Match(result.Output);
+                repository.Changes = 0;
+
+                if (changesMatches.Success)
+                {
+                    repository.ChangesReport = "";
+                    foreach (var changesMatch in changesMatches.Captures)
+                    {
+                        ++repository.Changes;
+                        repository.ChangesReport += changesMatch.ToString() + "\n";
+                    }
+                }
+                else
+                {
+                    repository.ChangesReport = "No changes";
+                }
+
                 var match = tuple.Key.Match(result.Output);
                 if (match.Success)
                 {
