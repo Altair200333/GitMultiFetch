@@ -28,6 +28,18 @@ namespace GitMulltyFetch
 
         public Brush StatusColor => GetStatusColor();
         public string ChangesText => GetChangesText();
+        public Brush ChangesColor => GetChangesColor();
+
+        public int WarningChangesCount = 5;
+
+        private Brush GetChangesColor()
+        {
+            if (Changes == 0)
+                return new SolidColorBrush(Colors.Green);
+            if (Changes < WarningChangesCount)
+                return new SolidColorBrush(Colors.Orange);
+            return new SolidColorBrush(Colors.Red);
+        }
 
         private string GetChangesText()
         {
@@ -44,12 +56,16 @@ namespace GitMulltyFetch
         {
             base.SetStatus(status);
             
+            //Status
             OnPropertyChanged(nameof(Status));
             OnPropertyChanged(nameof(StatusColor));
             OnPropertyChanged(nameof(StatusReport));
+
+            //Changes
             OnPropertyChanged(nameof(Changes));
             OnPropertyChanged(nameof(ChangesText));
             OnPropertyChanged(nameof(ChangesReport));
+            OnPropertyChanged(nameof(ChangesColor));
         }
 
         private Brush GetStatusColor()

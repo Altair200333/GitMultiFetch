@@ -10,6 +10,7 @@
         Title="Git watchdog" Height="450" Width="800"
         xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:model="clr-namespace:GitMulltyFetch.Model"
+        xmlns:gitMulltyFetch="clr-namespace:GitMulltyFetch"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -46,7 +47,7 @@
                   ScrollViewer.CanContentScroll="False">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type model:Repository}">
-                    <model:Repository Name="RescueViewer" FullPath="C:\PetroGM.RescueViewer"/>
+                    <gitMulltyFetch:RepositoryViewModel Name="RescueViewer" FullPath="C:\PetroGM.RescueViewer"/>
                 </x:Array>
             </d:ListView.ItemsSource>
             <!--<ListView.View>
@@ -70,6 +71,7 @@
                                    Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    ToolTip="{Binding StatusReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <TextBlock Width="90" Style="{DynamicResource ResourceKey=MaterialDesignBody1TextBlock}"
+                                   Foreground="{Binding ChangesColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    Text="{Binding ChangesText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    ToolTip="{Binding ChangesReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                         <Button Click="RemoveItemButtonClick"

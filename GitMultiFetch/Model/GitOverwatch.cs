@@ -117,7 +117,15 @@ namespace GitMulltyFetch.Model
 
             if (!matched)
             {
-                repository.SetStatus(RepoStatus.NotAGitRepo);
+                var notRepoMatches = _notAGitRepoRegex.Match(result.Output);
+                if (notRepoMatches.Success)
+                {
+                    repository.SetStatus(RepoStatus.NotAGitRepo);
+                }
+                else
+                {
+                    repository.SetStatus(RepoStatus.UpToDate);
+                }
             }
         }
 
