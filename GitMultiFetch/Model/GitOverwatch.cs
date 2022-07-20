@@ -88,25 +88,25 @@ namespace GitMulltyFetch.Model
 
             repository.StatusReport = result.Output;
 
+            var changesMatches = _changesRegex.Match(result.Output);
+            repository.Changes = 0;
+
+            if (changesMatches.Success)
+            {
+                repository.ChangesReport = "";
+                foreach (var changesMatch in changesMatches.Captures)
+                {
+                    ++repository.Changes;
+                    repository.ChangesReport += changesMatch.ToString() + "\n";
+                }
+            }
+            else
+            {
+                repository.ChangesReport = "No changes";
+            }
+
             foreach (var tuple in _messageToStatus)
             {
-                var changesMatches = _changesRegex.Match(result.Output);
-                repository.Changes = 0;
-
-                if (changesMatches.Success)
-                {
-                    repository.ChangesReport = "";
-                    foreach (var changesMatch in changesMatches.Captures)
-                    {
-                        ++repository.Changes;
-                        repository.ChangesReport += changesMatch.ToString() + "\n";
-                    }
-                }
-                else
-                {
-                    repository.ChangesReport = "No changes";
-                }
-
                 var match = tuple.Key.Match(result.Output);
                 if (match.Success)
                 {
