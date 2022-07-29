@@ -88,19 +88,16 @@ namespace GitMulltyFetch.Model
 
             repository.StatusReport = result.Output;
 
-            var changesMatches = _changesRegex.Match(result.Output);
+            var changesMatches = _changesRegex.Matches(result.Output);
             repository.Changes = 0;
 
-            if (changesMatches.Success)
+            repository.ChangesReport = "";
+            foreach (var changesMatch in changesMatches)
             {
-                repository.ChangesReport = "";
-                foreach (var changesMatch in changesMatches.Captures)
-                {
-                    ++repository.Changes;
-                    repository.ChangesReport += changesMatch.ToString() + "\n";
-                }
+                ++repository.Changes;
+                repository.ChangesReport += changesMatch.ToString() + "\n";
             }
-            else
+            if (repository.Changes == 0)
             {
                 repository.ChangesReport = "No changes";
             }
@@ -141,6 +138,8 @@ namespace GitMulltyFetch.Model
 
         public void RefreshStatus(Repository repository)
         {
+            repository.Changes = 0;
+            repository.ChangesReport = "";
             repository.SetStatus(RepoStatus.Fetching);
             CommandRunner.RunCommand(SynchronizationContext.Current, fetchCommand,
                 result => UpdateStatus(repository, result), repository.FullPath);
